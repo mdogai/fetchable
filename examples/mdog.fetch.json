@@ -1,0 +1,75 @@
+{
+  "spec": "fetchable/0.1",
+  "description": "Machine-readable receipts for MDOG. A token is fetchable when every claim it makes ships with the exact RPC call that proves it. Verify everything below yourself; trust nothing, including this file.",
+  "token": {
+    "name": "MDOG",
+    "symbol": "MDOG",
+    "contract": "0x83fd0bdddafa9a499582899d49515060c361b9aa",
+    "chain_id": 5042,
+    "chain_name": "Arc",
+    "decimals": 18,
+    "deploy_block": 21129966,
+    "deploy_time": "2026-09-16T08:38:08Z",
+    "launchpad": "Minara (minara.fun), first token ever launched there",
+    "canonical_pair": "0xd67fdb79ceb19fe7c671b3def4fec48bef2322ec45e8e3b72ca918b77f1d218e",
+    "canonical_pair_note": "DexScreener also shows decoy pairs with absurd prices. Only the pair above is the real market."
+  },
+  "rpc": {
+    "public": "https://rpc.mainnet.arc.io",
+    "cors": "open",
+    "note": "Rate limited. State is pruned (no archive); all proofs below read current state only."
+  },
+  "claims": [
+    {
+      "id": "supply-fixed",
+      "statement": "Total supply is 1,000,000,000 MDOG, fixed, 18 decimals.",
+      "proof": {
+        "type": "eth_call",
+        "to": "0x83fd0bdddafa9a499582899d49515060c361b9aa",
+        "data": "0x18160ddd",
+        "signature": "totalSupply()",
+        "expect": "0x0000000000000000000000000000000000000000033b2e3c9fd0803ce8000000",
+        "expect_meaning": "1e27 raw = 1,000,000,000 * 1e18"
+      }
+    },
+    {
+      "id": "dev-holds-zero",
+      "statement": "The deployer wallet holds zero MDOG. It took ~45M at launch, sold via a router, and walked. We say 'dev holds zero', never 'no team allocation'.",
+      "proof": {
+        "type": "eth_call",
+        "to": "0x83fd0bdddafa9a499582899d49515060c361b9aa",
+        "data": "0x70a08231000000000000000000000000be87176c44a013dc541c48660d7417bcbac91431",
+        "signature": "balanceOf(0xbe87176c44a013dc541c48660d7417bcbac91431)",
+        "expect": "0x0000000000000000000000000000000000000000000000000000000000000000",
+        "expect_meaning": "zero"
+      }
+    },
+    {
+      "id": "lp-burned",
+      "statement": "The Uniswap v4 liquidity position (NFT 27155) is owned by the dead address. One add, zero removals. It cannot be pulled.",
+      "proof": {
+        "type": "eth_call",
+        "to": "0x6049c9a0e26405C0985f9E3685C87d0aE917f82B",
+        "to_meaning": "Uniswap v4 PositionManager on Arc",
+        "data": "0x6352211e0000000000000000000000000000000000000000000000000000000000006a13",
+        "signature": "ownerOf(27155)",
+        "expect": "0x000000000000000000000000000000000000000000000000000000000000dead",
+        "expect_meaning": "0x000000000000000000000000000000000000dEaD"
+      }
+    }
+  ],
+  "not_claimed": [
+    "MDOG is not issued by, affiliated with, or endorsed by Minara or Circle.",
+    "No price, market cap, or liquidity depth figures are published here; they move. Read the canonical pair for live numbers.",
+    "Nothing is locked or reserved. The burned LP is burned, not locked."
+  ],
+  "links": {
+    "human_site": "https://mdog.fun",
+    "agent_site": "https://mdog.ai",
+    "buy": "https://minara.fun/token/0x83fd0bdddafa9a499582899d49515060c361b9aa",
+    "chart": "https://dexscreener.com/arc/0xd67fdb79ceb19fe7c671b3def4fec48bef2322ec45e8e3b72ca918b77f1d218e",
+    "explorer": "https://explorer.arc.io/token/0x83fd0bdddafa9a499582899d49515060c361b9aa",
+    "x": "https://x.com/mdogarc"
+  },
+  "tagline": "Fetch or be fetched."
+}
