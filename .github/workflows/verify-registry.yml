@@ -1,0 +1,21 @@
+name: verify-registry
+
+on:
+  pull_request:
+    paths:
+      - "registry.json"
+  push:
+    branches: [main]
+    paths:
+      - "registry.json"
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Verify every registry entry against chain state
+        run: node verify/registry-check.mjs
