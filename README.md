@@ -29,6 +29,10 @@ Distrust the token's listed RPC? Use your own: `--rpc <url>`.
 
 Write a `fetch.json` per [SPEC.md](SPEC.md), serve it at your token site with open CORS, and only claim what your proofs prove. The spec's honesty rule is the whole point: a claim without a proof does not belong in the document.
 
+## Get listed in the registry
+
+[registry.json](registry.json) maps Arc contract addresses to their published fetch.json, so verifiers (including the live checker at [mdog.ai](https://mdog.ai)) can find and run a token's receipts from its address alone. To list your token: publish your fetch.json, verify it passes (`node verify/fetch-verify.mjs <your-url>`), then open a PR adding your address. Documents that fail verification will not be merged. Listing is not an endorsement; the receipts prove themselves or they don't.
+
 ## What this is not
 
 Not a score, not an endorsement, not a rug guarantee. Three honest claims can still be a bad trade. Fetchable proves exactly one thing: whether a token's published claims match chain state right now.

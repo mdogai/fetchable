@@ -1,0 +1,13 @@
+{
+  "spec": "fetchable-registry/0.1",
+  "chain_id": 5042,
+  "chain_name": "Arc",
+  "description": "Tokens on Arc that publish machine-readable receipts per the fetchable spec. Verifiers use this to find a token's fetch.json from its contract address. Listing here is not an endorsement; the receipts prove themselves or they don't.",
+  "how_to_list": "Publish a fetch.json for your token per SPEC.md (served with open CORS), then open a pull request adding your contract address and the document URL below. PRs that point at documents which fail verification will not be merged.",
+  "tokens": {
+    "0x83fd0bdddafa9a499582899d49515060c361b9aa": {
+      "symbol": "MDOG",
+      "fetch_json": "https://mdog.ai/fetch.json"
+    }
+  }
+}
